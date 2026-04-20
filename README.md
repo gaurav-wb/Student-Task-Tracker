@@ -38,6 +38,7 @@ The project is live here:
 
 ### 🟢 Start UI
 ![Start UI](Demo-Screenshots/Initial-Start.png) 
+### ➕ Task Added
 ![Task added](Demo-Screenshots/Task-Added.png)
 
 ### ✅ Complete Task
