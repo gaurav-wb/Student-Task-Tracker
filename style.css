@@ -1,83 +1,250 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: rgb(15, 23, 42);
-    margin: 0;
-    padding: 20px;
+:root { /*defines global css variables; anything inside can be reused everywhere*/
+    --secondary: rgb(100, 100, 100); 
+    --danger: rgb(220, 50, 50);
+    --green: green;
 }
 
-.container {
+body { /*applies styling to whole page*/
+    font-family: Arial, sans-serif; /*default font is arial but if not available it falls back to sans-serif*/
+    background-color: rgb(15, 23, 42);
+    margin: 0; /*removes default browser spacing*/
+    padding: 20px; /*add consistent padding around page */
+}
 
-    max-width: 850px;
-    margin: auto;
-    padding-left: 20px;
+.container { /*main wrapper*/
+
+    max-width: 850px; /*limits width so as to prevent stretching on big screens*/
+    margin: auto; /*centers container horizontally*/
+    padding-left: 20px; 
     padding-right: 20px;
     padding-top: 1px;
     padding-bottom: 3px;
-    border-radius: 12px;
-    box-shadow: 10px 10px 5px ;
-    background-color:rgb(51, 67, 103);
+    /* above padding was used for internal spacing inside the container: ; */
+    border-radius: 12px; /*rounded corners*/
+    box-shadow: 10px 10px 5px; 
+    background-color: rgb(51, 67, 103);
 }
 
 h1 {
     text-align: center;
-    color: rgb(222, 227, 235) ;
+    color: rgb(222, 227, 235);
 }
 
 .form-section {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
+    display: flex; /*enables flexible layout */
+    flex-wrap: wrap; /*allows items to go next line on small screen*/
+    gap: 12px;
     margin-bottom: 20px;
-    justify-content: center;
+    padding: 15px;
+    border: 1px solid black; /*border around form*/
+    border-radius: 12px;
+    justify-content: center; /*centers items horizontally*/
+    align-items: center; /*aligns items vertically*/
+    background-color: rgb(30, 41, 59);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4); /*floating card effect*/
+    /* r,g,b,transparent*/
+    /* box-shadow breakdown: 0 --> shadow centered horizontally ; 4px push shadow down; 15px blur radius, rgba opacity color */
+
 }
 
-input, select, button {
+input,
+select,
+button {
     padding: 10px;
     font-size: 16px;
-}
-
-button {
-    background-color:rgb(142, 101, 237); 
-    color: rgb(21, 23, 24);
-    border: none;
-    border-radius: 6px;
+    border-radius: 20px;
+    border: 1px solid #475569;
+    background-color: rgb(227, 221, 221);
     cursor: pointer;
 }
 
-.task-card {
-  border: 1px solid #cfd8e3;
-  padding: 14px;
-  margin-bottom: 12px;
-  border-radius: 10px;
-  background-color: #fafbfc;
-  gap:15px;
+
+
+button {
+    background-color: rgb(142, 101, 237);
+    color: rgb(21, 23, 24);
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: rgb(120, 80, 210);
+    transform: scale(1.05);
+}
+
+.task-card {  /*for each task container*/
+    border: 1px solid #cfd8e3;
+    padding: 14px;
+    margin-bottom: 12px; /*spaces between tasks*/
+    border-radius: 10px;
+    background-color: #fafbfc;
+    gap: 15px;
+}
+/* completed task style */
+.task-card.completed-task h3,
+.task-card.completed-task p {
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+
+/*instead of stricking entire card, it targets only h3 and p */
+
+/* Dashboard Grid */
+.summary-grid {
+    display: flex; /*horizontal layout*/
+    gap: 15px;
+    flex-wrap: wrap; /*responsive stacking*/
+    margin-bottom: 20px;
+}
+
+.summary-card { /*individual stat box*/
+    flex: 1; /*allcards equal width*/
+    min-width: 180px; /*prevents shrinking too small*/
+    padding: 15px;
+    border-radius: 12px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    box-shadow: 30px 30px 30px rgba(0, 0, 0, 0.3);
+}
+ /* BADGE --> number display */
+.summary-card span {
+    font-size: 22px;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 5px 12px; /*makes badge pill shape*/
+    border-radius: 20px; /*fully rounded badge*/
+    color: white;
+}
+
+/* colors */
+.total {
+    background: #334b7a;
 }
 
 .completed {
-  background-color: #e8f5e9;
-  text-decoration: line-through;
-  
+    background: var(--green);
 }
 
-.summary {
-
-  margin-bottom: 20px;
-  border: 1px solid black;
-  border-radius: 12px;
-  padding-left: 10px;
-  background-color: wheat;
+.incomplete {
+    background: #ff3030;
 }
 
 .btn-group {
     display: flex;
     gap: 10px;
     margin-top: 10px;
-    
+
 }
 
 .incomplete {
     font-weight: bold;
-    color: red;
+    color: rgb(255, 255, 255);
 }
 
+/* delete button */
+.btn-outline {
+    background: transparent;
+    border: 2px solid;
+
+}
+
+.btn-outline-danger {
+    border-color: var(--danger);
+    color: var(--danger);
+}
+
+.btn-outline-danger:hover {
+    background: var(--danger);
+    color: white;
+}
+
+
+/* add task button */
+.btn-pulse {
+    background: rgb(155, 89, 182);
+    animation: pulse 2s infinite;
+    color: white;
+    margin-left: 55px;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(155, 89, 182, 0.7);
+    }
+
+    70% {
+        box-shadow: 0 0 0 15px rgba(155, 89, 182, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(155, 89, 182, 0);
+    }
+}
+
+.btn-pulse:hover {
+    background: #8e44ad;
+}
+
+/* complete button */
+.btn-outline {
+    background: transparent;
+    border: 2px solid;
+
+}
+
+.btn-outline-green {
+    border-color: var(--green);
+    color: var(--green);
+}
+
+.btn-outline-green:hover {
+    background: var(--green);
+    color: white;
+}
+
+/* undo button */
+.btn-glow {
+    background: black;
+    color: white;
+
+}
+
+.glow-purple:hover {
+    box-shadow: 0 0 10px rgb(0, 200, 100), 0 0 30px rgb(0, 200, 100);
+}
+
+select {
+    background-color: rgb(61, 80, 125);
+    color: white;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+/* Works in some browsers only */
+option {
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+}
+
+.filter-buttons {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+    justify-content: center;
+}
+
+.filter-buttons button {
+    background: #1e293b;
+    color: white;
+    border: 1px solid #475569;
+}
+
+.filter-buttons button:hover {
+    background: #334155;
+}
 

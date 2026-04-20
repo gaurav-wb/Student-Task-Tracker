@@ -33,31 +33,25 @@ function addTask() {  //this runs when button add task is clicked
 
 //to display  tasks//
 function displayTasks() {
-    let taskList = document.getElementById("tasklist"); //gets the container where tasks will appear
-    taskList.innerHTML = ""; //clears everything
+    let taskList = document.getElementById("tasklist");//gets the container where tasks will appear
+    taskList.innerHTML = "";//clears everything
 
-    if (tasks.length === 0) { //check if array is empty
-        taskList.innerHTML = " No tasks added yet"; //Shows message
-        return; //stops function
-
+    if (tasks.length === 0) {//check if array is empty
+        taskList.innerHTML = "<p>No tasks added yet</p>";//Shows message
+        return;//stops function
     }
 
-    for (let i = 0; i < tasks.length; i++) { //loops through every tasks
-        let task = tasks[i]; ///get current task obj
+    for (let i = 0; i < tasks.length; i++) {//loops through every tasks
+        let task = tasks[i];//get current task obj
 
-        let card = document.createElement("div"); //create new html elelemnt
-        card.classList.add("task-card") //adds css class
+        let card = document.createElement("div");//create new html elelemnt
+        card.classList.add("task-card");//adds css class
 
-        if (tasks.completed === true) {
-            card.classList.add("completed");
-        } //if done --> apply different style
-
-        let status;
         if (task.completed === true) {
-            status = "completed"
-        } else {
-            status = "incomplete"
-        }
+            card.classList.add("completed-task");
+        }//if done --> apply different style
+
+        let status = task.completed ? "completed" : "incomplete";
 
         card.innerHTML =
             "<h3>" + task.name + "</h3>" +
@@ -65,15 +59,14 @@ function displayTasks() {
             "<p>Priority: " + task.priority + "</p>" +
             "<p>Status: " + status + "</p>" +
             "<div class='btn-group'>" +
-            "<button onclick='completeTask(" + task.id + ")'>Complete</button>" +
-            "<button onclick='deleteTask(" + task.id + ")'>Delete</button>" +
-            "<button onclick='undoComplete(" + task.id + ")'>Undo</button>"
-        "</div>";
+                "<button class='btn-outline btn-outline-green' onclick='completeTask(" + task.id + ")'>Complete</button>" +
+                "<button class='btn-outline btn-outline-danger' onclick='deleteTask(" + task.id + ")'>Delete</button>" +
+                "<button class='btn-glow glow-purple' onclick='undoComplete(" + task.id + ")'>Undo</button>" +
+            "</div>";
 
-taskList.appendChild(card) //adds card to page
+        taskList.appendChild(card);//adds card to page
     }
 }
-
 //complete task 
 function completeTask(id) { //takes task id 
     for ( let i = 0; i<tasks.length; i++) {
@@ -120,21 +113,34 @@ function undoComplete(id) { //takes tasks id
 
 // UPDATE SUMMARY
 function updateSummary() {
-    let total = tasks.length; //count total tasks
-    let completed = 0; //counter
+    let total = tasks.length; //total tasks
+    let completed = 0;
 
     for (let i = 0; i < tasks.length; i++) {
-        if (tasks[i].completed === true) { 
-            completed++; //count completed tasks
+        if (tasks[i].completed) {
+            completed++; //loops and counts completed tasks
         }
     }
 
-    let incomplete = total - completed; //remaining tasks
+    let incomplete = total - completed; //compute incomplete 
 
-    let summary = document.getElementById("summary");
+    document.getElementById("summary").innerHTML = //render dashboard
+        "<div class='summary-grid'>" +
 
-    summary.innerHTML =
-        "<p>Total Tasks: " + total + "</p>" +
-        "<p>Completed Tasks: " + completed + "</p>" +
-        "<p class='incomplete'>Incomplete Tasks: " + incomplete + "</p>";
+            "<div class='summary-card total'>" +
+                "<h4>Total Tasks</h4>" +
+                "<span>" + total + "</span>" +
+            "</div>" +
+
+            "<div class='summary-card completed'>" +
+                "<h4>Completed Tasks</h4>" +
+                "<span>" + completed + "</span>" +
+            "</div>" +
+
+            "<div class='summary-card incomplete'>" +
+                "<h4>Incomplete Tasks</h4>" +
+                "<span>" + incomplete + "</span>" +
+            "</div>" +
+
+        "</div>";
 }
