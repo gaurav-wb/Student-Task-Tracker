@@ -47,7 +47,7 @@ The project is live here:
 ![Undo Task](Demo-Screenshots/undo.png)
 
 ### ❌ Delete Task
-![Delete Task](Demo-Screenshots/Delete-task.png)
+![Delete Task](Demo-Screenshots/Delete-Task.png)
 
 ---
 
