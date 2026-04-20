@@ -93,21 +93,21 @@ function deleteTask(id) {
 
     for (let i = 0; i < tasks.length; i++) {
         if (tasks[i].id !== id) {
-            newTasks.push(tasks[i]);
+            newTasks.push(tasks[i]); //copy everything except the deleted one
         }
     }
 
-    tasks = newTasks;
+    tasks = newTasks; //replace old array
 
     displayTasks();
     updateSummary();
 }
 
 //UNDO TASK 
-function undoComplete(id) {
+function undoComplete(id) { //takes tasks id
     for (let i = 0; i < tasks.length; i++) {
         if (tasks[i].id === id) {
-            tasks[i].completed = false;
+            tasks[i].completed = false; //reverts status
             break;
         }
     }
@@ -120,21 +120,21 @@ function undoComplete(id) {
 
 // UPDATE SUMMARY
 function updateSummary() {
-    let total = tasks.length;
-    let completed = 0;
+    let total = tasks.length; //count total tasks
+    let completed = 0; //counter
 
     for (let i = 0; i < tasks.length; i++) {
-        if (tasks[i].completed === true) {
-            completed++;
+        if (tasks[i].completed === true) { 
+            completed++; //count completed tasks
         }
     }
 
-    let incomplete = total - completed;
+    let incomplete = total - completed; //remaining tasks
 
     let summary = document.getElementById("summary");
 
     summary.innerHTML =
         "<p>Total Tasks: " + total + "</p>" +
         "<p>Completed Tasks: " + completed + "</p>" +
-        "<p class= 'incomplete'>Incomplete Tasks: " + incomplete + "</p>";
+        "<p class='incomplete'>Incomplete Tasks: " + incomplete + "</p>";
 }
