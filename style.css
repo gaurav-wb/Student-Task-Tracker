@@ -231,20 +231,3 @@ option {
     color: rgb(0, 0, 0);
 }
 
-.filter-buttons {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 15px;
-    justify-content: center;
-}
-
-.filter-buttons button {
-    background: #1e293b;
-    color: white;
-    border: 1px solid #475569;
-}
-
-.filter-buttons button:hover {
-    background: #334155;
-}
-
