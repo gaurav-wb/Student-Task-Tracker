@@ -82,6 +82,10 @@ function completeTask(id) { //takes task id
 
 // DELETE TASK
 function deleteTask(id) {
+    let confirmDelete = confirm("Are you sure you want to delete the task")
+    if (!confirmDelete) {
+        return
+    }
     let newTasks = []; //create new array
 
     for (let i = 0; i < tasks.length; i++) {
